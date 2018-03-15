@@ -1,0 +1,12 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+      - name: install NTP
+        apt:
+           name: ntp
+           state: present
+      - name: start service
+        service: 
+           name: ntp
+           state: started
