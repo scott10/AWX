@@ -1,0 +1,27 @@
+---
+- hosts: ansible.lumic.local
+  sudo: yes
+  tasks:
+      - name: install zabbix-agent
+        apt:
+           name: zabbix-agent
+           state: present    
+      - name: copy config
+        file:
+            path=/etc/zabbix/zabbix_agentd.conf
+            state=touch
+      - name: amend config   
+        blockinfile:
+            path: /etc/zabbix/zabbix_agentd.conf
+            block: |
+             PidFile=/var/run/zabbix/zabbix_agentd.pid
+             LogFile=/var/log/zabbix-agent/zabbix_agentd.log
+             LogFileSize=0
+             Server=monitor.lumic.co.uk
+             ServerActive=monitor.lumic.co.uk
+             Hostname={{inventory_hostname}}
+            state: present
+      - name: start service
+        service:
+            name: zabbix-agent
+            state: started 
