@@ -1,5 +1,5 @@
 ---
-- hosts: ansible.lumic.local
+- hosts: all
   sudo: yes
   tasks:
       - name: install zabbix-agent
