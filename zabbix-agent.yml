@@ -17,8 +17,8 @@
              PidFile=/var/run/zabbix/zabbix_agentd.pid
              LogFile=/var/log/zabbix-agent/zabbix_agentd.log
              LogFileSize=0
-             Server=monitor.lumic.co.uk
-             ServerActive=monitor.lumic.co.uk
+             Server={{zabbix_server}}
+             ServerActive={{zabbix_server}}
              Hostname={{inventory_hostname}}
             state: present
       - name: start service
