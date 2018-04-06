@@ -1,12 +1,28 @@
 ---
 - hosts: all
   become: yes
+  gather_facts: true
   tasks:
-      - name: install NTP
+      - name: install NTP for Debian
         apt:
            name: ntp
            state: present
-      - name: start service
+        when: ansible_distribution == 'Debian'   
+ 
+      - name: install NTP for CentOS
+        yum:
+           name: ntp
+           state: present
+        when: ansible_distribution == 'CentOS'
+        
+      - name: start service Debian
         service: 
            name: ntp
            state: started
+        when: ansible_distribution == 'Debian'
+        
+      - name: start service CentOS
+        service: 
+           name: ntpd
+           state: started
+        when: ansible_distribution == 'CentOS'          
