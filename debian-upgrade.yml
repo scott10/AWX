@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: true
+  tasks:
+    - name: Update packages list
+      apt: update_cache=yes
+      when: ansible_os_family == 'Debian'
