@@ -25,6 +25,8 @@
         service: 
            name: ntpd
            state: started
-        when: ansible_distribution == 'CentOS'          
-
+        when: ansible_distribution == 'CentOS'
         
+      - name: set timezone Europe/London
+        timezone:
+           name: Europe/London
