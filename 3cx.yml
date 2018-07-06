@@ -1,27 +1,24 @@
+
 ---
 - hosts: all
   become: yes
   tasks:
-      - name: add 3cx Apt Key
-        apt_key:
-            url: http://downloads-global.3cx.com/downloads/3cxpbx/public.key
-            state: present
-	  
-      - name: add 3cx repository
-        apt_repository:
-            repo: http://downloads-global.3cx.com/downloads/debian
-            state: present
-	 
-      - name: Update packages list
-        apt: update_cache=yes
-	
-      - name: Install 3CX
-        apt:
-            name: 3cxpbx
-            state: present
-	
-        - name: Install net-tools
-        apt:
-            name: net-tools
-            state: present
-	
+        - name: add 3cx Apt Key
+          apt_key:
+            url=http://downloads-global.3cx.com/downloads/3cxpbx/public.key
+            state=present
+
+        - name: add 3cx repo
+          apt_repository:
+           repo='deb http://downloads-global.3cx.com/downloads/debian stretch main'
+           state=present
+
+        - name: update package list
+          apt:
+           update_cache=yes
+
+        - name: install 3cx and Net-tools
+          apt:
+           name=3cxpbx
+           name=net-tools
+           state=present
